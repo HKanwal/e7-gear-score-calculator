@@ -39,12 +39,13 @@
           'Flat-DEF': ''
         },
         calcGS: (fields) => {
-          return parseInt(fields['ATK%'] || 0) + parseInt(fields['HP%'] || 0)
+          const unrounded = parseInt(fields['ATK%'] || 0) + parseInt(fields['HP%'] || 0)
             + parseInt(fields['DEF%'] || 0) + parseInt(fields['EFF%'] || 0)
             + parseInt(fields['ER%'] || 0) + parseInt(fields['CC%'] || 0)*1.5
             + parseInt(fields['CD%'] || 0)*1.1 + parseInt(fields['SPD'] || 0)*1.9
             + parseInt(fields['Flat-ATK'] || 0)/10 + parseInt(fields['Flat-HP'] || 0)/50
             + parseInt(fields['Flat-DEF'] || 0)/6;
+          return Math.round(unrounded*100)/100;
         }
       }"
     >
