@@ -48,42 +48,40 @@
         }
       }"
     >
-      <template x-for="(value, key) in fields">
-        <div class="mb-3 mx-auto" style="max-width: 500px">
-          <label
-            :for="key"
-            class="form-label"
-            x-text="key.replace('-', ' ')"
-          ></label>
-          <div class="input-group">
-            <input
-              type="number"
-              class="form-control"
-              :name="key"
-              :id="key"
-              placeholder=""
-              :value="value"
-              @input="fields[key] = $event.target.value"
-              :disabled="!value && Object.values(fields).filter(x => x.length > 0).length >= 4"
-            />
-            <span class="input-group-text" x-show="key.includes('%')">%</span>
+      <div class="mt-3 mx-auto w-75" style="max-width: 500px">
+        <template x-for="(value, key) in fields">
+          <div class="mb-3">
+            <label
+              :for="key"
+              class="form-label"
+              x-text="key.replace('-', ' ')"
+            ></label>
+            <div class="input-group">
+              <input
+                type="number"
+                class="form-control"
+                :name="key"
+                :id="key"
+                placeholder=""
+                :value="value"
+                @input="fields[key] = $event.target.value"
+                :disabled="!value && Object.values(fields).filter(x => x.length > 0).length >= 4"
+              />
+              <span class="input-group-text" x-show="key.includes('%')">%</span>
+            </div>
           </div>
+        </template>
+        <div class="input-group input-group-lg mb-3">
+          <span class="input-group-text">GS:</span>
+          <input
+            type="number"
+            class="form-control"
+            name="GS"
+            id="GS"
+            :value="calcGS(fields)"
+            disabled
+          />
         </div>
-      </template>
-
-      <div
-        class="input-group input-group-lg mb-3 mx-auto"
-        style="max-width: 500px"
-      >
-        <span class="input-group-text">GS:</span>
-        <input
-          type="number"
-          class="form-control"
-          name="GS"
-          id="GS"
-          :value="calcGS(fields)"
-          disabled
-        />
       </div>
     </div>
   </body>
